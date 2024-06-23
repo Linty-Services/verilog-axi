@@ -4,3 +4,5 @@
 *.vvp
 *.kate-swp
 
+.linty/work/
+.scannerwork/

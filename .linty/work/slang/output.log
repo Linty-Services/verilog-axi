@@ -1,0 +1,121 @@
+Top level design units:
+    axi_adapter
+    axi_axil_adapter
+    axi_cdma
+    axi_cdma_desc_mux
+    axi_crossbar
+    axi_dma
+    axi_dma_desc_mux
+    axi_dp_ram
+    axi_fifo
+    axi_interconnect
+    axi_ram
+    axi_register
+    axi_vfifo
+    axil_adapter
+    axil_cdc
+    axil_crossbar
+    axil_dp_ram
+    axil_interconnect
+    axil_ram
+    axil_reg_if
+    axil_register
+
+
+Build failed: 32 errors, 0 warnings
+rtl/axi_vfifo_enc.v:287:71: error: cannot select range of 4 elements from 'logic[1:0]' [-Wrange-width-oob]
+                int_seg_valid[si] = s_axis_tkeep[SEG_BYTE_LANES*si +: SEG_BYTE_LANES] != 0;
+                                                                      ^~~~~~~~~~~~~~
+rtl/axi_vfifo_enc.v:357:132: error: cannot select range of 32 elements from 'reg[15:0]' [-Wrange-width-oob]
+        seg_mem_wr_data[seg*SEG_WIDTH +: SEG_WIDTH] = int_seg_data[seg_mem_wr_sel[seg*SEG_IDX_WIDTH +: SEG_IDX_WIDTH]*SEG_WIDTH +: SEG_WIDTH];
+                                                                                                                                   ^~~~~~~~~
+rtl/axil_adapter_wr.v:215:80: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                        m_axil_wstrb_next = s_axil_wstrb << (m_axil_awaddr_reg[M_ADDR_BIT_OFFSET - 1:S_ADDR_BIT_OFFSET] * S_STRB_WIDTH);
+                                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_wr.v:338:66: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    m_axil_wstrb_next = s_axi_wstrb << (addr_reg[AXIL_ADDR_BIT_OFFSET-1:AXI_ADDR_BIT_OFFSET] * AXI_STRB_WIDTH);
+                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_wr.v:357:52: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                                data_next[addr_reg[AXIL_ADDR_BIT_OFFSET-1:AXI_ADDR_BIT_OFFSET]*SEGMENT_DATA_WIDTH+i*AXIL_WORD_SIZE +: AXIL_WORD_SIZE] = s_axi_wdata[i*AXIL_WORD_SIZE +: AXIL_WORD_SIZE];
+                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_wr.v:358:52: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                                strb_next[addr_reg[AXIL_ADDR_BIT_OFFSET-1:AXI_ADDR_BIT_OFFSET]*SEGMENT_STRB_WIDTH+i] = 1'b1;
+                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_wr.v:362:44: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                        data_next[addr_reg[AXIL_ADDR_BIT_OFFSET-1:AXI_ADDR_BIT_OFFSET]*SEGMENT_DATA_WIDTH +: SEGMENT_DATA_WIDTH] = s_axi_wdata;
+                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_wr.v:363:44: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                        strb_next[addr_reg[AXIL_ADDR_BIT_OFFSET-1:AXI_ADDR_BIT_OFFSET]*SEGMENT_STRB_WIDTH +: SEGMENT_STRB_WIDTH] = s_axi_wstrb;
+                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_wr.v:454:66: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    m_axil_wdata_next = s_axi_wdata >> (addr_reg[AXI_ADDR_BIT_OFFSET-1:AXIL_ADDR_BIT_OFFSET] * AXIL_DATA_WIDTH);
+                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_wr.v:455:66: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    m_axil_wstrb_next = s_axi_wstrb >> (addr_reg[AXI_ADDR_BIT_OFFSET-1:AXIL_ADDR_BIT_OFFSET] * AXIL_STRB_WIDTH);
+                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_wr.v:472:63: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    m_axil_wdata_next = data_reg >> (addr_reg[AXI_ADDR_BIT_OFFSET-1:AXIL_ADDR_BIT_OFFSET] * AXIL_DATA_WIDTH);
+                                                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_wr.v:473:63: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    m_axil_wstrb_next = strb_reg >> (addr_reg[AXI_ADDR_BIT_OFFSET-1:AXIL_ADDR_BIT_OFFSET] * AXIL_STRB_WIDTH);
+                                                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_rd.v:339:84: error: endianness of selection must match declared range (type is 'logic[31:0]')
+                            m_axi_arlen_next = ({1'b0, s_axi_arlen} + s_axi_araddr[M_ADDR_BIT_OFFSET-1:S_ADDR_BIT_OFFSET]) >> $clog2(SEGMENT_COUNT);
+                                                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_rd.v:368:64: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    s_axi_rdata_int = m_axi_rdata >> (addr_reg[M_ADDR_BIT_OFFSET-1:S_ADDR_BIT_OFFSET] * S_DATA_WIDTH);
+                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_rd.v:393:64: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    s_axi_rdata_int = m_axi_rdata >> (addr_reg[M_ADDR_BIT_OFFSET-1:S_ADDR_BIT_OFFSET] * S_DATA_WIDTH);
+                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_rd.v:420:61: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    s_axi_rdata_int = data_reg >> (addr_reg[M_ADDR_BIT_OFFSET-1:S_ADDR_BIT_OFFSET] * S_DATA_WIDTH);
+                                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_rd.v:502:40: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    data_next[addr_reg[S_ADDR_BIT_OFFSET-1:M_ADDR_BIT_OFFSET]*SEGMENT_DATA_WIDTH +: SEGMENT_DATA_WIDTH] = m_axi_rdata;
+                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axil_adapter_rd.v:191:80: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                        s_axil_rdata_next = m_axil_rdata >> (m_axil_araddr_reg[M_ADDR_BIT_OFFSET - 1:S_ADDR_BIT_OFFSET] * S_DATA_WIDTH);
+                                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_rd.v:289:66: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    s_axi_rdata_next = m_axil_rdata >> (addr_reg[AXIL_ADDR_BIT_OFFSET-1:AXI_ADDR_BIT_OFFSET] * AXI_DATA_WIDTH);
+                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_rd.v:319:66: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    s_axi_rdata_next = m_axil_rdata >> (addr_reg[AXIL_ADDR_BIT_OFFSET-1:AXI_ADDR_BIT_OFFSET] * AXI_DATA_WIDTH);
+                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_rd.v:349:62: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    s_axi_rdata_next = data_reg >> (addr_reg[AXIL_ADDR_BIT_OFFSET-1:AXI_ADDR_BIT_OFFSET] * AXI_DATA_WIDTH);
+                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_axil_adapter_rd.v:415:40: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    data_next[addr_reg[AXI_ADDR_BIT_OFFSET-1:AXIL_ADDR_BIT_OFFSET]*SEGMENT_DATA_WIDTH +: SEGMENT_DATA_WIDTH] = m_axil_rdata;
+                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_wr.v:387:84: error: endianness of selection must match declared range (type is 'logic[31:0]')
+                            m_axi_awlen_next = ({1'b0, s_axi_awlen} + s_axi_awaddr[M_ADDR_BIT_OFFSET-1:S_ADDR_BIT_OFFSET]) >> $clog2(SEGMENT_COUNT);
+                                                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_wr.v:417:64: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    m_axi_wstrb_int = s_axi_wstrb << (addr_reg[M_ADDR_BIT_OFFSET-1:S_ADDR_BIT_OFFSET] * S_STRB_WIDTH);
+                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_wr.v:440:52: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                                data_next[addr_reg[M_ADDR_BIT_OFFSET-1:S_ADDR_BIT_OFFSET]*SEGMENT_DATA_WIDTH+i*M_WORD_SIZE +: M_WORD_SIZE] = s_axi_wdata[i*M_WORD_SIZE +: M_WORD_SIZE];
+                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_wr.v:441:52: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                                strb_next[addr_reg[M_ADDR_BIT_OFFSET-1:S_ADDR_BIT_OFFSET]*SEGMENT_STRB_WIDTH+i] = 1'b1;
+                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_wr.v:445:44: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                        data_next[addr_reg[M_ADDR_BIT_OFFSET-1:S_ADDR_BIT_OFFSET]*SEGMENT_DATA_WIDTH +: SEGMENT_DATA_WIDTH] = s_axi_wdata;
+                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_wr.v:446:44: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                        strb_next[addr_reg[M_ADDR_BIT_OFFSET-1:S_ADDR_BIT_OFFSET]*SEGMENT_STRB_WIDTH +: SEGMENT_STRB_WIDTH] = s_axi_wstrb;
+                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_wr.v:551:64: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    m_axi_wdata_int = s_axi_wdata >> (addr_reg[S_ADDR_BIT_OFFSET-1:M_ADDR_BIT_OFFSET] * M_DATA_WIDTH);
+                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_wr.v:552:64: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    m_axi_wstrb_int = s_axi_wstrb >> (addr_reg[S_ADDR_BIT_OFFSET-1:M_ADDR_BIT_OFFSET] * M_STRB_WIDTH);
+                                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_wr.v:579:61: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    m_axi_wdata_int = data_reg >> (addr_reg[S_ADDR_BIT_OFFSET-1:M_ADDR_BIT_OFFSET] * M_DATA_WIDTH);
+                                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rtl/axi_adapter_wr.v:580:61: error: endianness of selection must match declared range (type is 'reg[31:0]')
+                    m_axi_wstrb_int = strb_reg >> (addr_reg[S_ADDR_BIT_OFFSET-1:M_ADDR_BIT_OFFSET] * M_STRB_WIDTH);
+                                                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
